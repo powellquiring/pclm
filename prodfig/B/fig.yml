@@ -1,0 +1,22 @@
+ccm:
+  image: powellquiring/pccm:1.0
+  ports:
+   - "8281:9080"
+  links:
+   - db2ccm:db2
+  environment:
+    JTS: http://10.0.2.15:8280
+jts:
+  image: powellquiring/pjts:1.0
+  ports:
+   - "8280:9080"
+  links:
+   - db2jts:db2
+db2ccm:
+  image: powellquiring/pdb2:1.0
+  volumes:
+   - ccm/data:/data
+db2jts:
+  image: powellquiring/pdb2:1.0
+  volumes:
+   - jts/data:/data
